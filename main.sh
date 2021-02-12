@@ -42,7 +42,7 @@ if python -u add_unix_time.py "$input_file_path" "${input_file_path}_1"; then
         echo "removing unix timestamps ..."
         if cut -d $delimiter -f "1"-$col_num "${input_file_path}_2" > "$output_file_path"; then
             head -5 "$output_file_path"
-            echo "total number of lines written:" $(( $(wc -l < "$output_file_path") - 1 ))
+            echo "total number of lines written:" $(wc -l < "$output_file_path")
             if ! curl -s -S --header 'Content-Type: application/json' --data "{\""$DEP_INSTANCE"\": {\"output_csv\": \""$output_file"\"}}" -X POST "$JOB_CALLBACK_URL"; then
                 echo "callback failed"
                 rm "$output_file_path"
