@@ -16,7 +16,6 @@
 
 
 import datetime
-import time
 import sys
 import os
 
@@ -24,6 +23,11 @@ import os
 delimiter = os.getenv("delimiter")
 time_format = os.getenv("time_format")
 time_col = os.getenv("time_column")
+
+
+def get_microseconds(timestamp: str) -> int:
+    dt = datetime.datetime.strptime(timestamp, time_format)
+    return int(dt.timestamp() * 1000000)
 
 
 with open(sys.argv[1], "r") as in_file:
@@ -34,5 +38,5 @@ with open(sys.argv[1], "r") as in_file:
         time_col_num = first_line.index(time_col)
         for line in in_file:
             line = line.strip().split(delimiter)
-            line.append(str(time.mktime(datetime.datetime.strptime(line[time_col_num], time_format).timetuple())))
+            line.append(str(get_microseconds(line[time_col_num])))
             out_file.write(delimiter.join(line) + "\n")
