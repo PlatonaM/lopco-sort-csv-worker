@@ -1,4 +1,28 @@
-#### Description
+## lopco-sort-csv-worker
+
+Sorts the rows of a CSV file based on the contained timestamps.
+
+### Configuration
+
+`delimiter`: Delimiter used in the CSV file.
+
+`time_column`: Column containing timestamps.
+
+`time_format`: Use these [format codes](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes) when providing the timestamp format.
+
+### Inputs
+
+Type: single
+
+`input_csv`: CSV file to sort.
+
+### Outputs
+
+Type: single
+
+`output_csv`: Sorted CSV file.
+
+### Description
 
     {
         "name": "Sort CSV",
